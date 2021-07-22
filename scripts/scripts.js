@@ -16,5 +16,7 @@ function makeBlack(e) {
     this.classList.add('makeBlack');
 }
 
-createGrid(5);
+console.dir(document.querySelector('#color-picker').value);
+
+createGrid(16);
 
