@@ -6,6 +6,19 @@ h1 {
     margin: 0.5em;
 }
 
+.div-style {
+    margin: 0;
+    border: 0;
+}
+
+.div-style:hover {
+    background: black;
+}
+
+.makeBlack {
+    background: black;
+}
+
 #buttons {
     display: flex;
     justify-content: center;
@@ -17,7 +30,8 @@ button {
 }
 
 #container{
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
     margin: 1rem auto;
     border: 1px solid black;
     height: 400px;
