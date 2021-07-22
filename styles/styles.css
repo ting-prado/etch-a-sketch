@@ -1,40 +1,57 @@
 body {
     display: grid;
+    max-height: 100vh;
     grid-template-columns: 30% 1fr;
+    grid-template-rows: 18% 1fr;
     grid-column-gap: 50px;
 }
 
 h1 {
     grid-column: 1/2;
+    grid-row: 1/2;
     text-align: center;
-    font-size: 3rem;
+    padding-top: 23px;
+    padding-bottom: 23px;
+    font-size: 2.8rem;
     font-family: 'Merriweather Sans', sans-serif;
     font-weight: bold;
     margin: 0.5em;
 }
 
-.div-style {
-    margin: 0;
-    border: 0;
+#choose-color {
+    margin-top: 10em;
+    text-align: center;
 }
 
-.makeBlack {
-    background: black;
+#color-picker {
+    border: 0;
+    width: 5em;
+    position:relative;
+    top: 3px;
 }
 
 #buttons {
-    grid-column: 1/2;
+    margin-top: 0.5em;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 3rem;
+    height: 9rem;
 }
 
 button {
-    display: inline-block;
-    margin-bottom: 1em;
-    width: 100px;
+    width: 7em;
+    margin: 0.02em auto 1em auto;
+}
+
+.div-style {
+    box-sizing: border-box;
+    margin: 0;
+    border: 1px solid black;
+}
+
+.makeBlack {
+    background: black;
 }
 
 #container{
@@ -44,6 +61,6 @@ button {
     flex-wrap: wrap;
     margin: 1rem auto;
     border: 1px solid black;
-    height: 400px;
-    width: 400px;
+    height: 600px;
+    width: 700px;
 }
