@@ -1,4 +1,11 @@
+body {
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    grid-column-gap: 50px;
+}
+
 h1 {
+    grid-column: 1/2;
     text-align: center;
     font-size: 3rem;
     font-family: 'Merriweather Sans', sans-serif;
@@ -11,25 +18,28 @@ h1 {
     border: 0;
 }
 
-.div-style:hover {
-    background: black;
-}
-
 .makeBlack {
     background: black;
 }
 
 #buttons {
+    grid-column: 1/2;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     margin-top: 3rem;
 }
 
 button {
-    margin-left: 1em;
+    display: inline-block;
+    margin-bottom: 1em;
+    width: 100px;
 }
 
 #container{
+    grid-column: 2 / 3;
+    grid-row: 1/3;
     display: flex;
     flex-wrap: wrap;
     margin: 1rem auto;
