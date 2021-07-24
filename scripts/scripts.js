@@ -1,15 +1,31 @@
 const container = document.querySelector('#container');
-
-// const rainbowBtn = document.querySelector('#rainbow');
-// rainbowBtn.addEventListener('click', )
+let clickState = 0;
 
 function createGrid(size){
     for(let i=1; i<=(size*size); i++){
         const div = document.createElement('div');
         div.setAttribute('style', `width: ${700/size}px; height: ${550/size}px`);
         div.classList.add('div-style');
-        div.addEventListener('mouseover', makeRainbow);
+        div.setAttribute('class', 'divs');
         container.appendChild(div);
+    }
+}
+createGrid(24);
+
+container.addEventListener('click', togglePen);
+function togglePen() {
+    const divs = document.querySelectorAll('.divs');
+    if(clickState == 0){
+        divs.forEach(div => {
+            div.addEventListener('mouseover', makeBlack);
+        });
+        clickState = 1;
+    }
+    else {
+        divs.forEach(div => {
+            div.removeEventListener('mouseover', makeBlack);
+        });
+        clickState = 0;
     }
 }
 
@@ -25,6 +41,4 @@ function makeRainbow(e) {
 function makeBlack(e) {
     this.classList.add('makeBlack');
 }
-
-createGrid(16);
 
