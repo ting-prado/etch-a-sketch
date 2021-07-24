@@ -11,10 +11,17 @@ function createGrid(size){
     }
 }
 createGrid(24);
-
+const divs = document.querySelectorAll('.divs');
+const clearBtn = document.querySelector('#clear');
 container.addEventListener('click', togglePen);
+clearBtn.addEventListener('click', clearSketch);
+
+function clearSketch() {
+    divs.forEach(div => {
+        div.classList.remove('makeBlack');
+    });
+}
 function togglePen() {
-    const divs = document.querySelectorAll('.divs');
     if(clickState == 0){
         divs.forEach(div => {
             div.addEventListener('mouseover', makeBlack);
