@@ -11,6 +11,7 @@ function createGrid(size){
     }
 }
 createGrid(24);
+
 const divs = document.querySelectorAll('.divs');
 const clearBtn = document.querySelector('#clear');
 container.addEventListener('click', togglePen);
@@ -18,19 +19,20 @@ clearBtn.addEventListener('click', clearSketch);
 
 function clearSketch() {
     divs.forEach(div => {
-        div.classList.remove('makeBlack');
+        div.style.backgroundColor = 'white';
     });
 }
+
 function togglePen() {
     if(clickState == 0){
         divs.forEach(div => {
-            div.addEventListener('mouseover', makeBlack);
+            div.addEventListener('mouseover', makeRainbow);
         });
         clickState = 1;
     }
     else {
         divs.forEach(div => {
-            div.removeEventListener('mouseover', makeBlack);
+            div.removeEventListener('mouseover', makeRainbow);
         });
         clickState = 0;
     }
@@ -43,9 +45,10 @@ function makeRainbow(e) {
         randomColor += hex[Math.floor(Math.random()*(hex.length-1))];
     }
     this.style.backgroundColor = `${randomColor}`;
+    console.dir(this);
 }
 
 function makeBlack(e) {
-    this.classList.add('makeBlack');
+    this.style.backgroundColor = 'black';
 }
 

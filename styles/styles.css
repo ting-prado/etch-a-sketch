@@ -2,7 +2,7 @@ body {
     background: url('../images/dot-bg.jpg');
     display: grid;
     max-height: 100vh;
-    grid-template-columns: 5% 30% 1fr;
+    grid-template-columns: 4% 30% 1fr;
     grid-template-rows: 18% 1fr;
     grid-column-gap: 1em;
 }
@@ -91,10 +91,6 @@ button:hover {
 .div-style {
     box-sizing: border-box;
     margin: 0;
-}
-
-.makeBlack {
-    background: black;
 }
 
 #container{
