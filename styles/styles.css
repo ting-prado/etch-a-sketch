@@ -91,6 +91,7 @@ button:hover {
 .div-style {
     box-sizing: border-box;
     margin: 0;
+    background: 'white';
 }
 
 #container{

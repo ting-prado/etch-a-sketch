@@ -39,13 +39,76 @@ function togglePen() {
 }
 
 function makeRainbow(e) {
-    const hex = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
-    let randomColor = '#';
-    for(let i=0; i<6; i++){
-        randomColor += hex[Math.floor(Math.random()*(hex.length-1))];
+    let h = [Math.floor(Math.random()*360)],
+        smin = Math.ceil(50),
+        smax = Math.floor(100),
+        s = [Math.floor(Math.random()*(smax - smin) + smin)],
+        l = 50;
+    if (this.style.backgroundColor == ""){
+        let randomColor = `hsl(${h}, ${s}%, ${l}%)`;
+        console.log(randomColor);
+        this.style.backgroundColor = randomColor;
     }
-    this.style.backgroundColor = `${randomColor}`;
-    console.dir(this);
+    else {
+        let splitrgb = this.style.backgroundColor.split(/[\s,()]+/, 4),
+        r = splitrgb[1],
+        g = splitrgb[2],
+        b = splitrgb[3],
+        hslValue = rgbToHsl(r, g, b);
+        this.style.backgroundColor = darkenColor(hslValue[0], hslValue[1], hslValue[2]);
+    }
+}
+
+function darkenColor(h, s, l){
+    let newColor = `hsl(${h}, ${s}%, ${l-5}%)`;
+    return newColor;
+}
+
+function rgbToHsl(r, g, b){
+    // Make r, g, and b fractions of 1
+    r /= 255;
+    g /= 255;
+    b /= 255;
+  
+    // Find greatest and smallest channel values
+    let cmin = Math.min(r,g,b),
+        cmax = Math.max(r,g,b),
+        delta = cmax - cmin,
+        h = 0,
+        s = 0,
+        l = 0;
+
+    // Calculate hue
+    // No difference
+    if (delta == 0)
+        h = 0;
+    // Red is max
+    else if (cmax == r)
+        h = ((g - b) / delta) % 6;
+    // Green is max
+    else if (cmax == g)
+        h = (b - r) / delta + 2;
+    // Blue is max
+    else
+        h = (r - g) / delta + 4;
+
+    h = Math.round(h * 60);
+  
+    // Make negative hues positive behind 360°
+    if (h < 0)
+        h += 360;
+
+      // Calculate lightness
+  l = (cmax + cmin) / 2;
+
+  // Calculate saturation
+  s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+    
+  // Multiply l and s by 100
+  s = +(s * 100).toFixed(0);
+  l = +((l) * 100).toFixed(1);
+
+   return [h,s,l];
 }
 
 function makeBlack(e) {
