@@ -14,8 +14,12 @@ createGrid(24);
 
 const divs = document.querySelectorAll('.divs');
 const clearBtn = document.querySelector('#clear');
+const blackBtn = document.querySelector('#black');
+const rainbowBtn = document.querySelector('#rainbow');
 container.addEventListener('click', togglePen);
 clearBtn.addEventListener('click', clearSketch);
+rainbowBtn.addEventListener('click', rainbowPen);
+blackBtn.addEventListener('click', blackPen);
 
 function clearSketch() {
     divs.forEach(div => {
@@ -25,17 +29,31 @@ function clearSketch() {
 
 function togglePen() {
     if(clickState == 0){
-        divs.forEach(div => {
-            div.addEventListener('mouseover', makeRainbow);
-        });
-        clickState = 1;
+        
     }
     else {
         divs.forEach(div => {
-            div.removeEventListener('mouseover', makeRainbow);
+            div.removeEventListener('mouseover', rainbowPen);
+            div.removeEventListener('mouseover', blackPen);
         });
         clickState = 0;
     }
+}
+
+function blackPen() {
+    divs.forEach(div => {
+        div.removeEventListener('mouseover', makeRainbow);
+        div.addEventListener('mouseover', makeBlack);
+    });
+    clickState = 1;
+}
+
+function rainbowPen() {
+    divs.forEach(div => {
+        div.addEventListener('mouseover', makeRainbow);
+        div.removeEventListener('mouseover', makeBlack);
+    });
+    clickState = 1;
 }
 
 function makeRainbow(e) {
@@ -44,9 +62,8 @@ function makeRainbow(e) {
         smax = Math.floor(100),
         s = [Math.floor(Math.random()*(smax - smin) + smin)],
         l = 50;
-    if (this.style.backgroundColor == ""){
+    if (this.style.backgroundColor == "" || this.style.backgroundColor == 'white'){
         let randomColor = `hsl(${h}, ${s}%, ${l}%)`;
-        console.log(randomColor);
         this.style.backgroundColor = randomColor;
     }
     else {
@@ -113,5 +130,9 @@ function rgbToHsl(r, g, b){
 
 function makeBlack(e) {
     this.style.backgroundColor = 'black';
+}
+
+function penColor(e) {
+
 }
 
