@@ -16,10 +16,9 @@ const divs = document.querySelectorAll('.divs');
 const clearBtn = document.querySelector('#clear');
 const blackBtn = document.querySelector('#black');
 const rainbowBtn = document.querySelector('#rainbow');
-container.addEventListener('click', togglePen);
 clearBtn.addEventListener('click', clearSketch);
-rainbowBtn.addEventListener('click', rainbowPen);
 blackBtn.addEventListener('click', blackPen);
+rainbowBtn.addEventListener('click', rainbowPen);
 
 function clearSketch() {
     divs.forEach(div => {
@@ -27,33 +26,44 @@ function clearSketch() {
     });
 }
 
-function togglePen() {
+function blackPen(e) {
+    container.removeEventListener('click', drawRainbow);
+    container.addEventListener('click', drawBlack);
+}
+
+function rainbowPen(e) {
+    container.removeEventListener('click', drawBlack);
+    container.addEventListener('click', drawRainbow);
+}
+
+function drawRainbow(e){
     if(clickState == 0){
-        
+        divs.forEach(div => {
+            div.addEventListener('mouseover', makeRainbow);
+        });
+        clickState = 1;
     }
     else {
         divs.forEach(div => {
-            div.removeEventListener('mouseover', rainbowPen);
-            div.removeEventListener('mouseover', blackPen);
+            div.removeEventListener('mouseover', makeRainbow);
         });
         clickState = 0;
     }
 }
 
-function blackPen() {
-    divs.forEach(div => {
-        div.removeEventListener('mouseover', makeRainbow);
-        div.addEventListener('mouseover', makeBlack);
-    });
-    clickState = 1;
-}
-
-function rainbowPen() {
-    divs.forEach(div => {
-        div.addEventListener('mouseover', makeRainbow);
-        div.removeEventListener('mouseover', makeBlack);
-    });
-    clickState = 1;
+function drawBlack(e) {
+    if(clickState == 0){
+        divs.forEach(div => {
+            div.addEventListener('mouseover', makeBlack);
+        });
+        clickState = 1;
+    }
+    else {
+        divs.forEach(div => {
+            div.removeEventListener('mouseover', makeBlack);
+        });
+        clickState = 0;
+    }
 }
 
 function makeRainbow(e) {
@@ -130,9 +140,5 @@ function rgbToHsl(r, g, b){
 
 function makeBlack(e) {
     this.style.backgroundColor = 'black';
-}
-
-function penColor(e) {
-
 }
 
