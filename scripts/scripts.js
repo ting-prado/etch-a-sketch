@@ -14,9 +14,12 @@ createGrid(24);
 
 const divs = document.querySelectorAll('.divs');
 const clearBtn = document.querySelector('#clear');
+const colorPicker = document.querySelector('#color-picker');
 const blackBtn = document.querySelector('#black');
 const rainbowBtn = document.querySelector('#rainbow');
+
 clearBtn.addEventListener('click', clearSketch);
+colorPicker.addEventListener('change', customPen);
 blackBtn.addEventListener('click', blackPen);
 rainbowBtn.addEventListener('click', rainbowPen);
 
@@ -26,14 +29,38 @@ function clearSketch() {
     });
 }
 
+function customPen(e) {
+    container.addEventListener('click', drawCustomColor);
+    colorPicker.addEventListener('change', drawCustomColor);
+    container.removeEventListener('click', drawBlack);
+    container.removeEventListener('click', drawRainbow);
+}
+
 function blackPen(e) {
     container.removeEventListener('click', drawRainbow);
+    container.removeEventListener('click', drawCustomColor);
     container.addEventListener('click', drawBlack);
 }
 
 function rainbowPen(e) {
     container.removeEventListener('click', drawBlack);
+    container.removeEventListener('click', drawCustomColor);
     container.addEventListener('click', drawRainbow);
+}
+
+function drawCustomColor(e) {
+    if(clickState == 0){
+        divs.forEach(div => {
+            div.addEventListener('mouseover', makeCustom);
+        });
+        clickState = 1;
+    }
+    else {
+        divs.forEach(div => {
+            div.removeEventListener('mouseover', makeCustom);
+        });
+        clickState = 0;
+    }
 }
 
 function drawRainbow(e){
@@ -64,6 +91,10 @@ function drawBlack(e) {
         });
         clickState = 0;
     }
+}
+
+function makeCustom(e) {
+    this.style.backgroundColor = colorPicker.value;
 }
 
 function makeRainbow(e) {
