@@ -1,5 +1,6 @@
 const container = document.querySelector('#container');
-let clickState = 0;
+let clickState = 0,
+    penColor = 'yellow';
 
 function createGrid(size){
     for(let i=1; i<=(size*size); i++){
@@ -10,18 +11,25 @@ function createGrid(size){
         container.appendChild(div);
     }
 }
-createGrid(24);
+
+createGrid(16);
 
 const divs = document.querySelectorAll('.divs');
 const clearBtn = document.querySelector('#clear');
 const colorPicker = document.querySelector('#color-picker');
 const blackBtn = document.querySelector('#black');
 const rainbowBtn = document.querySelector('#rainbow');
+const gridSizeBtn = document.querySelector('#grid-size');
 
 clearBtn.addEventListener('click', clearSketch);
-colorPicker.addEventListener('change', customPen);
-blackBtn.addEventListener('click', blackPen);
-rainbowBtn.addEventListener('click', rainbowPen);
+container.addEventListener('click', togglePen);
+blackBtn.addEventListener('click', selectBlack);
+colorPicker.addEventListener('change', selectCustom);
+gridSizeBtn.addEventListener('click', newGrid);
+
+function newGrid() {
+    const size = prompt("Please enter grid size", "16");
+}
 
 function clearSketch() {
     divs.forEach(div => {
@@ -29,72 +37,31 @@ function clearSketch() {
     });
 }
 
-function customPen(e) {
-    container.addEventListener('click', drawCustomColor);
-    colorPicker.addEventListener('change', drawCustomColor);
-    container.removeEventListener('click', drawBlack);
-    container.removeEventListener('click', drawRainbow);
-}
-
-function blackPen(e) {
-    container.removeEventListener('click', drawRainbow);
-    container.removeEventListener('click', drawCustomColor);
-    container.addEventListener('click', drawBlack);
-}
-
-function rainbowPen(e) {
-    container.removeEventListener('click', drawBlack);
-    container.removeEventListener('click', drawCustomColor);
-    container.addEventListener('click', drawRainbow);
-}
-
-function drawCustomColor(e) {
+function togglePen(e) {
     if(clickState == 0){
         divs.forEach(div => {
-            div.addEventListener('mouseover', makeCustom);
+            div.addEventListener('mouseover', drawColor);
         });
         clickState = 1;
     }
     else {
         divs.forEach(div => {
-            div.removeEventListener('mouseover', makeCustom);
+            div.removeEventListener('mouseover', drawColor);
         });
         clickState = 0;
     }
 }
 
-function drawRainbow(e){
-    if(clickState == 0){
-        divs.forEach(div => {
-            div.addEventListener('mouseover', makeRainbow);
-        });
-        clickState = 1;
-    }
-    else {
-        divs.forEach(div => {
-            div.removeEventListener('mouseover', makeRainbow);
-        });
-        clickState = 0;
-    }
+function drawColor() {
+    this.style.backgroundColor = penColor;
 }
 
-function drawBlack(e) {
-    if(clickState == 0){
-        divs.forEach(div => {
-            div.addEventListener('mouseover', makeBlack);
-        });
-        clickState = 1;
-    }
-    else {
-        divs.forEach(div => {
-            div.removeEventListener('mouseover', makeBlack);
-        });
-        clickState = 0;
-    }
+function selectCustom() {
+    penColor = colorPicker.value;
 }
 
-function makeCustom(e) {
-    this.style.backgroundColor = colorPicker.value;
+function selectBlack() {
+    penColor = 'black';
 }
 
 function makeRainbow(e) {
@@ -167,9 +134,5 @@ function rgbToHsl(r, g, b){
   l = +((l) * 100).toFixed(1);
 
    return [h,s,l];
-}
-
-function makeBlack(e) {
-    this.style.backgroundColor = 'black';
 }
 
