@@ -6,7 +6,6 @@ function createGrid(size){
     for(let i=1; i<=(size*size); i++){
         const div = document.createElement('div');
         div.setAttribute('style', `width: ${700/size}px; height: ${550/size}px`);
-        div.classList.add('div-style');
         div.setAttribute('class', 'divs');
         container.appendChild(div);
     }
@@ -14,13 +13,13 @@ function createGrid(size){
 
 createGrid(16);
 
-const divs = document.querySelectorAll('.divs');
 const clearBtn = document.querySelector('#clear');
 const colorPicker = document.querySelector('#color-picker');
 const blackBtn = document.querySelector('#black');
 const rainbowBtn = document.querySelector('#rainbow');
 const eraserBtn = document.querySelector('#eraser');
-const gridSizeBtn = document.querySelector('#grid-size');
+const gridSlider = document.querySelector('#slider');
+const gridInput = document.querySelector('#num-input');
 
 clearBtn.addEventListener('click', clearSketch);
 container.addEventListener('click', togglePen);
@@ -28,19 +27,36 @@ blackBtn.addEventListener('click', selectBlack);
 rainbowBtn.addEventListener('click', selectRainbow);
 colorPicker.addEventListener('change', selectCustom);
 eraserBtn.addEventListener('click', selectEraser);
-gridSizeBtn.addEventListener('click', newGrid);
+gridSlider.addEventListener('change', newGridSlider);
+gridInput.addEventListener('change', newGridInput);
 
-function newGrid() {
-    const size = prompt("Please enter grid size", "16");
+function newGridSlider() {
+    deleteGrid();
+    createGrid(gridSlider.value);
+    penColor = colorPicker.value;
+    gridInput.value = gridSlider.value;
+}
+
+function newGridInput() {
+    deleteGrid();
+    createGrid(gridInput.value);
+    penColor = colorPicker.value;
+    gridSlider.value = gridInput.value;
+}
+
+function deleteGrid() {
+    container.innerHTML = "";
 }
 
 function clearSketch() {
+    const divs = document.querySelectorAll('.divs');
     divs.forEach(div => {
         div.style.backgroundColor = 'white';
     });
 }
 
 function togglePen(e) {
+    const divs = document.querySelectorAll('.divs');
     if(clickState == 0){
         divs.forEach(div => {
             div.addEventListener('mouseover', drawColor);
@@ -60,6 +76,7 @@ function drawColor() {
 }
 
 function selectEraser() {
+    const divs = document.querySelectorAll('.divs');
     penColor = 'white';
     divs.forEach(div => {
         div.removeEventListener('mouseover', makeRainbow);
@@ -67,6 +84,7 @@ function selectEraser() {
 }
 
 function selectCustom() {
+    const divs = document.querySelectorAll('.divs');
     penColor = colorPicker.value;
     divs.forEach(div => {
         div.removeEventListener('mouseover', makeRainbow);
@@ -74,6 +92,7 @@ function selectCustom() {
 }
 
 function selectBlack() {
+    const divs = document.querySelectorAll('.divs');
     penColor = 'black';
     divs.forEach(div => {
         div.removeEventListener('mouseover', makeRainbow);
@@ -81,6 +100,7 @@ function selectBlack() {
 }
 
 function selectRainbow() {
+    const divs = document.querySelectorAll('.divs');
     divs.forEach(div => {
         div.addEventListener('mouseover', makeRainbow);
     });

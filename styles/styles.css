@@ -36,7 +36,7 @@ p {
     width: 245px;
     height: 47px;
     padding-top: 14px;
-    margin-top: 3em;
+    margin-top: 2.9em;
     padding-left: 2.3em;
     margin-left: 2.5em;
     color: #fdff82;
@@ -45,6 +45,59 @@ p {
 
 #choose-color:hover {
     opacity: 0.9;
+}
+
+#slider {
+    position: relative;
+    width: 80px;
+    top: 3px;
+}
+
+#slider-div {
+    width: 218px;
+    margin: 1.5em auto 1.5em auto;
+    height: 43px;
+    padding-left: 2em;
+    padding-top: 0.6em;
+    font-family: inherit;
+    font-size: 18px;
+    color: #fdff82;
+    background: url('../images/brush-stroke.png');
+    background-size: contain;
+    background-position: 
+    center;
+}
+
+#slider-div:hover {
+    opacity: 0.9;
+}
+
+#slider::-webkit-slider-thumb {
+    cursor: pointer;
+}
+
+#slider::-moz-range-thumb {
+    cursor: pointer;
+}
+
+#num-input {
+    border: 0;
+    width: 25px;
+    font-size: 14px;
+    color: #fdff82;
+    font-family: cursive;
+    background: transparent;
+    margin-left: -5px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 #options {
@@ -73,7 +126,7 @@ p {
 button {
     width: 188px;
     margin: 0.2em auto 1.5em auto;
-    height: 42px;
+    height: 40px;
     border: 0;
     font-family: inherit;
     font-size: 18px;
@@ -87,7 +140,7 @@ button:hover {
     opacity: 0.9;
 }
 
-.div-style {
+.divs {
     box-sizing: border-box;
     margin: 0;
     background: 'white';
