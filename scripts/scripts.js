@@ -19,6 +19,7 @@ const clearBtn = document.querySelector('#clear');
 const colorPicker = document.querySelector('#color-picker');
 const blackBtn = document.querySelector('#black');
 const rainbowBtn = document.querySelector('#rainbow');
+const eraserBtn = document.querySelector('#eraser');
 const gridSizeBtn = document.querySelector('#grid-size');
 
 clearBtn.addEventListener('click', clearSketch);
@@ -26,6 +27,7 @@ container.addEventListener('click', togglePen);
 blackBtn.addEventListener('click', selectBlack);
 rainbowBtn.addEventListener('click', selectRainbow);
 colorPicker.addEventListener('change', selectCustom);
+eraserBtn.addEventListener('click', selectEraser);
 gridSizeBtn.addEventListener('click', newGrid);
 
 function newGrid() {
@@ -55,6 +57,13 @@ function togglePen(e) {
 
 function drawColor() {
     this.style.backgroundColor = penColor;
+}
+
+function selectEraser() {
+    penColor = 'white';
+    divs.forEach(div => {
+        div.removeEventListener('mouseover', makeRainbow);
+    });
 }
 
 function selectCustom() {

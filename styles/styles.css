@@ -36,7 +36,7 @@ p {
     width: 245px;
     height: 47px;
     padding-top: 14px;
-    margin-top: 5em;
+    margin-top: 3em;
     padding-left: 2.3em;
     margin-left: 2.5em;
     color: #fdff82;
@@ -68,12 +68,11 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 20rem;
 }
 
 button {
     width: 188px;
-    margin: 0.2em auto 2em auto;
+    margin: 0.2em auto 1.5em auto;
     height: 42px;
     border: 0;
     font-family: inherit;
