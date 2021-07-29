@@ -24,6 +24,7 @@ const gridSizeBtn = document.querySelector('#grid-size');
 clearBtn.addEventListener('click', clearSketch);
 container.addEventListener('click', togglePen);
 blackBtn.addEventListener('click', selectBlack);
+rainbowBtn.addEventListener('click', selectRainbow);
 colorPicker.addEventListener('change', selectCustom);
 gridSizeBtn.addEventListener('click', newGrid);
 
@@ -58,10 +59,22 @@ function drawColor() {
 
 function selectCustom() {
     penColor = colorPicker.value;
+    divs.forEach(div => {
+        div.removeEventListener('mouseover', makeRainbow);
+    });
 }
 
 function selectBlack() {
     penColor = 'black';
+    divs.forEach(div => {
+        div.removeEventListener('mouseover', makeRainbow);
+    });
+}
+
+function selectRainbow() {
+    divs.forEach(div => {
+        div.addEventListener('mouseover', makeRainbow);
+    });
 }
 
 function makeRainbow(e) {
@@ -72,7 +85,7 @@ function makeRainbow(e) {
         l = 50;
     if (this.style.backgroundColor == "" || this.style.backgroundColor == 'white'){
         let randomColor = `hsl(${h}, ${s}%, ${l}%)`;
-        this.style.backgroundColor = randomColor;
+        penColor = randomColor;
     }
     else {
         let splitrgb = this.style.backgroundColor.split(/[\s,()]+/, 4),
@@ -80,7 +93,7 @@ function makeRainbow(e) {
         g = splitrgb[2],
         b = splitrgb[3],
         hslValue = rgbToHsl(r, g, b);
-        this.style.backgroundColor = darkenColor(hslValue[0], hslValue[1], hslValue[2]);
+        penColor = darkenColor(hslValue[0], hslValue[1], hslValue[2]);
     }
 }
 
