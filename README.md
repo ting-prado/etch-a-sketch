@@ -35,6 +35,6 @@ This project is a browser version of something between a sketchpad and an Etch-a
 * Using different html input types
 * Color format conversion
 
-## Conclusion:
+## Thoughts after Completion:
 
 I found this project interesting and cool because it really tested my creativity and problem solving skills. I had to redo several functions after realizing better methods to implement the desired effects. I also noticed myself getting more and more familiar with css, html, and javascript. Whenever I encounter a problem, it became easier for me to find where it went wrong and was able to solve it. Overall, this project was really fun.
